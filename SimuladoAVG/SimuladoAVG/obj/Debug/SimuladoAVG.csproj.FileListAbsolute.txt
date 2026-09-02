@@ -1,0 +1,10 @@
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\bin\Debug\SimuladoAVG.exe.config
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\bin\Debug\SimuladoAVG.exe
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\bin\Debug\SimuladoAVG.pdb
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.csproj.AssemblyReference.cache
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.Form1.resources
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.Properties.Resources.resources
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.csproj.GenerateResource.cache
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.csproj.CoreCompileInputs.cache
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.exe
+C:\Users\Senai\Desktop\Simulado Sessao1\SimuladoAVG\SimuladoAVG\obj\Debug\SimuladoAVG.pdb
