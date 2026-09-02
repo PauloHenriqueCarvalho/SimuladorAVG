@@ -375,9 +375,19 @@ namespace SimuladoAVG
             {
                 var ciclo = c.ControleTurno.FirstOrDefault();
                 ciclo.CicloAtual++;
+
+                var listaRobos = c.Robos.ToList();
+
+                foreach (var item in listaRobos)
+                {
+                    if (item.PorcentagemBateria - item.TiposRobo.ConsumoBateriaPorCiclo <= 0) continue;
+                    item.PorcentagemBateria -= item.TiposRobo.ConsumoBateriaPorCiclo;
+                }
+
                 c.SaveChanges();
             }
             CarregarMetricas();
+            PainelTelemetria();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -424,6 +434,27 @@ namespace SimuladoAVG
                 return;
             }
 
+            var robo = dataGridView2.SelectedRows[0].DataBoundItem as RobosDTO;
+            using(var c = new SimuladorAGVEntities())
+            {
+                var roboR = c.Robos.FirstOrDefault(x => x.IdRobo == robo.Id);
+                roboR.PorcentagemBateria = 100;
+
+                var listaRobos = c.Robos.Where(x => x.IdRobo != robo.Id).ToList();
+
+                foreach (var item in listaRobos)
+                {
+                    item.PorcentagemBateria -= item.TiposRobo.ConsumoBateriaPorCiclo;
+                }
+
+
+                var ciclo = c.ControleTurno.FirstOrDefault();
+                ciclo.CicloAtual++;
+                c.SaveChanges();
+            }
+
+            CarregarMetricas();
+            PainelTelemetria();
         }
     }
 }
