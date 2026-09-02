@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SimuladorAGVModelStoreContainer" CdmEntityContainer="SimuladorAGVEntities">
+    <EntitySetMapping Name="ControleTurno">
+      <EntityTypeMapping TypeName="SimuladorAGVModel.ControleTurno">
+        <MappingFragment StoreEntitySet="ControleTurno">
+          <ScalarProperty Name="IdControle" ColumnName="IdControle" />
+          <ScalarProperty Name="CicloAtual" ColumnName="CicloAtual" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NiveisPeso">
+      <EntityTypeMapping TypeName="SimuladorAGVModel.NiveisPeso">
+        <MappingFragment StoreEntitySet="NiveisPeso">
+          <ScalarProperty Name="IdNivelPeso" ColumnName="IdNivelPeso" />
+          <ScalarProperty Name="NomeNivel" ColumnName="NomeNivel" />
+          <ScalarProperty Name="LimiteMinimoKg" ColumnName="LimiteMinimoKg" />
+          <ScalarProperty Name="LimiteMaximoKg" ColumnName="LimiteMaximoKg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paletes">
+      <EntityTypeMapping TypeName="SimuladorAGVModel.Paletes">
+        <MappingFragment StoreEntitySet="Paletes">
+          <ScalarProperty Name="IdPalete" ColumnName="IdPalete" />
+          <ScalarProperty Name="CodigoPalete" ColumnName="CodigoPalete" />
+          <ScalarProperty Name="Carga" ColumnName="Carga" />
+          <ScalarProperty Name="IdNivelPeso" ColumnName="IdNivelPeso" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Linha" ColumnName="Linha" />
+          <ScalarProperty Name="Coluna" ColumnName="Coluna" />
+          <ScalarProperty Name="RecebidoEm" ColumnName="RecebidoEm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Robos">
+      <EntityTypeMapping TypeName="SimuladorAGVModel.Robos">
+        <MappingFragment StoreEntitySet="Robos">
+          <ScalarProperty Name="IdRobo" ColumnName="IdRobo" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="IdTipoRobo" ColumnName="IdTipoRobo" />
+          <ScalarProperty Name="PorcentagemBateria" ColumnName="PorcentagemBateria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposRobo">
+      <EntityTypeMapping TypeName="SimuladorAGVModel.TiposRobo">
+        <MappingFragment StoreEntitySet="TiposRobo">
+          <ScalarProperty Name="IdTipoRobo" ColumnName="IdTipoRobo" />
+          <ScalarProperty Name="NomeTipo" ColumnName="NomeTipo" />
+          <ScalarProperty Name="ConsumoBateriaPorCiclo" ColumnName="ConsumoBateriaPorCiclo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

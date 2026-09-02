@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SimuladorAGVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ControleTurno">
+    <Key>
+      <PropertyRef Name="IdControle" />
+    </Key>
+    <Property Name="IdControle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CicloAtual" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NiveisPeso">
+    <Key>
+      <PropertyRef Name="IdNivelPeso" />
+    </Key>
+    <Property Name="IdNivelPeso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeNivel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LimiteMinimoKg" Type="Int32" Nullable="false" />
+    <Property Name="LimiteMaximoKg" Type="Int32" />
+    <NavigationProperty Name="Paletes" Relationship="Self.FK__Paletes__IdNivel__534D60F1" FromRole="NiveisPeso" ToRole="Paletes" />
+  </EntityType>
+  <EntityType Name="Paletes">
+    <Key>
+      <PropertyRef Name="IdPalete" />
+    </Key>
+    <Property Name="IdPalete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodigoPalete" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Carga" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdNivelPeso" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Linha" Type="Byte" />
+    <Property Name="Coluna" Type="Byte" />
+    <Property Name="RecebidoEm" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="NiveisPeso" Relationship="Self.FK__Paletes__IdNivel__534D60F1" FromRole="Paletes" ToRole="NiveisPeso" />
+  </EntityType>
+  <EntityType Name="Robos">
+    <Key>
+      <PropertyRef Name="IdRobo" />
+    </Key>
+    <Property Name="IdRobo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Identificador" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdTipoRobo" Type="Int32" Nullable="false" />
+    <Property Name="PorcentagemBateria" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+    <NavigationProperty Name="TiposRobo" Relationship="Self.FK__Robos__IdTipoRob__5AEE82B9" FromRole="Robos" ToRole="TiposRobo" />
+  </EntityType>
+  <EntityType Name="TiposRobo">
+    <Key>
+      <PropertyRef Name="IdTipoRobo" />
+    </Key>
+    <Property Name="IdTipoRobo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeTipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConsumoBateriaPorCiclo" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+    <NavigationProperty Name="Robos" Relationship="Self.FK__Robos__IdTipoRob__5AEE82B9" FromRole="TiposRobo" ToRole="Robos" />
+  </EntityType>
+  <Association Name="FK__Paletes__IdNivel__534D60F1">
+    <End Role="NiveisPeso" Type="Self.NiveisPeso" Multiplicity="1" />
+    <End Role="Paletes" Type="Self.Paletes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NiveisPeso">
+        <PropertyRef Name="IdNivelPeso" />
+      </Principal>
+      <Dependent Role="Paletes">
+        <PropertyRef Name="IdNivelPeso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Robos__IdTipoRob__5AEE82B9">
+    <End Role="TiposRobo" Type="Self.TiposRobo" Multiplicity="1" />
+    <End Role="Robos" Type="Self.Robos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposRobo">
+        <PropertyRef Name="IdTipoRobo" />
+      </Principal>
+      <Dependent Role="Robos">
+        <PropertyRef Name="IdTipoRobo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SimuladorAGVEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ControleTurno" EntityType="Self.ControleTurno" />
+    <EntitySet Name="NiveisPeso" EntityType="Self.NiveisPeso" />
+    <EntitySet Name="Paletes" EntityType="Self.Paletes" />
+    <EntitySet Name="Robos" EntityType="Self.Robos" />
+    <EntitySet Name="TiposRobo" EntityType="Self.TiposRobo" />
+    <AssociationSet Name="FK__Paletes__IdNivel__534D60F1" Association="Self.FK__Paletes__IdNivel__534D60F1">
+      <End Role="NiveisPeso" EntitySet="NiveisPeso" />
+      <End Role="Paletes" EntitySet="Paletes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Robos__IdTipoRob__5AEE82B9" Association="Self.FK__Robos__IdTipoRob__5AEE82B9">
+      <End Role="TiposRobo" EntitySet="TiposRobo" />
+      <End Role="Robos" EntitySet="Robos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SimuladorAGVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ControleTurno">
+          <Key>
+            <PropertyRef Name="IdControle" />
+          </Key>
+          <Property Name="IdControle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CicloAtual" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NiveisPeso">
+          <Key>
+            <PropertyRef Name="IdNivelPeso" />
+          </Key>
+          <Property Name="IdNivelPeso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeNivel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LimiteMinimoKg" Type="int" Nullable="false" />
+          <Property Name="LimiteMaximoKg" Type="int" />
+        </EntityType>
+        <EntityType Name="Paletes">
+          <Key>
+            <PropertyRef Name="IdPalete" />
+          </Key>
+          <Property Name="IdPalete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoPalete" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Carga" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IdNivelPeso" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Linha" Type="tinyint" />
+          <Property Name="Coluna" Type="tinyint" />
+          <Property Name="RecebidoEm" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Robos">
+          <Key>
+            <PropertyRef Name="IdRobo" />
+          </Key>
+          <Property Name="IdRobo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificador" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdTipoRobo" Type="int" Nullable="false" />
+          <Property Name="PorcentagemBateria" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposRobo">
+          <Key>
+            <PropertyRef Name="IdTipoRobo" />
+          </Key>
+          <Property Name="IdTipoRobo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeTipo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ConsumoBateriaPorCiclo" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Paletes__IdNivel__534D60F1">
+          <End Role="NiveisPeso" Type="Self.NiveisPeso" Multiplicity="1" />
+          <End Role="Paletes" Type="Self.Paletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NiveisPeso">
+              <PropertyRef Name="IdNivelPeso" />
+            </Principal>
+            <Dependent Role="Paletes">
+              <PropertyRef Name="IdNivelPeso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Robos__IdTipoRob__5AEE82B9">
+          <End Role="TiposRobo" Type="Self.TiposRobo" Multiplicity="1" />
+          <End Role="Robos" Type="Self.Robos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposRobo">
+              <PropertyRef Name="IdTipoRobo" />
+            </Principal>
+            <Dependent Role="Robos">
+              <PropertyRef Name="IdTipoRobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SimuladorAGVModelStoreContainer">
+          <EntitySet Name="ControleTurno" EntityType="Self.ControleTurno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NiveisPeso" EntityType="Self.NiveisPeso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paletes" EntityType="Self.Paletes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Robos" EntityType="Self.Robos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposRobo" EntityType="Self.TiposRobo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Paletes__IdNivel__534D60F1" Association="Self.FK__Paletes__IdNivel__534D60F1">
+            <End Role="NiveisPeso" EntitySet="NiveisPeso" />
+            <End Role="Paletes" EntitySet="Paletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Robos__IdTipoRob__5AEE82B9" Association="Self.FK__Robos__IdTipoRob__5AEE82B9">
+            <End Role="TiposRobo" EntitySet="TiposRobo" />
+            <End Role="Robos" EntitySet="Robos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SimuladorAGVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ControleTurno">
+          <Key>
+            <PropertyRef Name="IdControle" />
+          </Key>
+          <Property Name="IdControle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CicloAtual" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NiveisPeso">
+          <Key>
+            <PropertyRef Name="IdNivelPeso" />
+          </Key>
+          <Property Name="IdNivelPeso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeNivel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LimiteMinimoKg" Type="Int32" Nullable="false" />
+          <Property Name="LimiteMaximoKg" Type="Int32" />
+          <NavigationProperty Name="Paletes" Relationship="Self.FK__Paletes__IdNivel__534D60F1" FromRole="NiveisPeso" ToRole="Paletes" />
+        </EntityType>
+        <EntityType Name="Paletes">
+          <Key>
+            <PropertyRef Name="IdPalete" />
+          </Key>
+          <Property Name="IdPalete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoPalete" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Carga" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdNivelPeso" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Linha" Type="Byte" />
+          <Property Name="Coluna" Type="Byte" />
+          <Property Name="RecebidoEm" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="NiveisPeso" Relationship="Self.FK__Paletes__IdNivel__534D60F1" FromRole="Paletes" ToRole="NiveisPeso" />
+        </EntityType>
+        <EntityType Name="Robos">
+          <Key>
+            <PropertyRef Name="IdRobo" />
+          </Key>
+          <Property Name="IdRobo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificador" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdTipoRobo" Type="Int32" Nullable="false" />
+          <Property Name="PorcentagemBateria" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+          <NavigationProperty Name="TiposRobo" Relationship="Self.FK__Robos__IdTipoRob__5AEE82B9" FromRole="Robos" ToRole="TiposRobo" />
+        </EntityType>
+        <EntityType Name="TiposRobo">
+          <Key>
+            <PropertyRef Name="IdTipoRobo" />
+          </Key>
+          <Property Name="IdTipoRobo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeTipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConsumoBateriaPorCiclo" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+          <NavigationProperty Name="Robos" Relationship="Self.FK__Robos__IdTipoRob__5AEE82B9" FromRole="TiposRobo" ToRole="Robos" />
+        </EntityType>
+        <Association Name="FK__Paletes__IdNivel__534D60F1">
+          <End Role="NiveisPeso" Type="Self.NiveisPeso" Multiplicity="1" />
+          <End Role="Paletes" Type="Self.Paletes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NiveisPeso">
+              <PropertyRef Name="IdNivelPeso" />
+            </Principal>
+            <Dependent Role="Paletes">
+              <PropertyRef Name="IdNivelPeso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Robos__IdTipoRob__5AEE82B9">
+          <End Role="TiposRobo" Type="Self.TiposRobo" Multiplicity="1" />
+          <End Role="Robos" Type="Self.Robos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposRobo">
+              <PropertyRef Name="IdTipoRobo" />
+            </Principal>
+            <Dependent Role="Robos">
+              <PropertyRef Name="IdTipoRobo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SimuladorAGVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ControleTurno" EntityType="Self.ControleTurno" />
+          <EntitySet Name="NiveisPeso" EntityType="Self.NiveisPeso" />
+          <EntitySet Name="Paletes" EntityType="Self.Paletes" />
+          <EntitySet Name="Robos" EntityType="Self.Robos" />
+          <EntitySet Name="TiposRobo" EntityType="Self.TiposRobo" />
+          <AssociationSet Name="FK__Paletes__IdNivel__534D60F1" Association="Self.FK__Paletes__IdNivel__534D60F1">
+            <End Role="NiveisPeso" EntitySet="NiveisPeso" />
+            <End Role="Paletes" EntitySet="Paletes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Robos__IdTipoRob__5AEE82B9" Association="Self.FK__Robos__IdTipoRob__5AEE82B9">
+            <End Role="TiposRobo" EntitySet="TiposRobo" />
+            <End Role="Robos" EntitySet="Robos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SimuladorAGVModelStoreContainer" CdmEntityContainer="SimuladorAGVEntities">
+          <EntitySetMapping Name="ControleTurno">
+            <EntityTypeMapping TypeName="SimuladorAGVModel.ControleTurno">
+              <MappingFragment StoreEntitySet="ControleTurno">
+                <ScalarProperty Name="IdControle" ColumnName="IdControle" />
+                <ScalarProperty Name="CicloAtual" ColumnName="CicloAtual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NiveisPeso">
+            <EntityTypeMapping TypeName="SimuladorAGVModel.NiveisPeso">
+              <MappingFragment StoreEntitySet="NiveisPeso">
+                <ScalarProperty Name="IdNivelPeso" ColumnName="IdNivelPeso" />
+                <ScalarProperty Name="NomeNivel" ColumnName="NomeNivel" />
+                <ScalarProperty Name="LimiteMinimoKg" ColumnName="LimiteMinimoKg" />
+                <ScalarProperty Name="LimiteMaximoKg" ColumnName="LimiteMaximoKg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paletes">
+            <EntityTypeMapping TypeName="SimuladorAGVModel.Paletes">
+              <MappingFragment StoreEntitySet="Paletes">
+                <ScalarProperty Name="IdPalete" ColumnName="IdPalete" />
+                <ScalarProperty Name="CodigoPalete" ColumnName="CodigoPalete" />
+                <ScalarProperty Name="Carga" ColumnName="Carga" />
+                <ScalarProperty Name="IdNivelPeso" ColumnName="IdNivelPeso" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Linha" ColumnName="Linha" />
+                <ScalarProperty Name="Coluna" ColumnName="Coluna" />
+                <ScalarProperty Name="RecebidoEm" ColumnName="RecebidoEm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Robos">
+            <EntityTypeMapping TypeName="SimuladorAGVModel.Robos">
+              <MappingFragment StoreEntitySet="Robos">
+                <ScalarProperty Name="IdRobo" ColumnName="IdRobo" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="IdTipoRobo" ColumnName="IdTipoRobo" />
+                <ScalarProperty Name="PorcentagemBateria" ColumnName="PorcentagemBateria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposRobo">
+            <EntityTypeMapping TypeName="SimuladorAGVModel.TiposRobo">
+              <MappingFragment StoreEntitySet="TiposRobo">
+                <ScalarProperty Name="IdTipoRobo" ColumnName="IdTipoRobo" />
+                <ScalarProperty Name="NomeTipo" ColumnName="NomeTipo" />
+                <ScalarProperty Name="ConsumoBateriaPorCiclo" ColumnName="ConsumoBateriaPorCiclo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
